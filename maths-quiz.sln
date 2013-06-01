@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "maths-quiz", "maths-quiz\maths-quiz.csproj", "{3F4B2779-B2D0-4D60-9EA6-CA78981AB66A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{80D4553C-DD5A-4D3B-9F9E-AC5B0413C462}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F4B2779-B2D0-4D60-9EA6-CA78981AB66A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F4B2779-B2D0-4D60-9EA6-CA78981AB66A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F4B2779-B2D0-4D60-9EA6-CA78981AB66A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F4B2779-B2D0-4D60-9EA6-CA78981AB66A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

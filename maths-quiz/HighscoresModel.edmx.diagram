@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="426c822fa06f409d9eade63bbc2864ce" Name="Diagram1">
+        <EntityTypeShape EntityType="HighscoresModel.Game" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HighscoresModel.Level" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HighscoresModel.Profile" Width="1.5" PointX="5.125" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="HighscoresModel.FK_LevelGame" ManuallyRouted="false" />
+        <AssociationConnector Association="HighscoresModel.FK_ProfileGame" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

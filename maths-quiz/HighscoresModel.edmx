@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HighscoresModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="HighscoresModelStoreContainer">
+          <EntitySet Name="Games" EntityType="HighscoresModel.Store.Games" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Levels" EntityType="HighscoresModel.Store.Levels" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Profiles" EntityType="HighscoresModel.Store.Profiles" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <AssociationSet Name="FK_LevelGame" Association="HighscoresModel.Store.FK_LevelGame">
+            <End Role="Levels" EntitySet="Levels" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileGame" Association="HighscoresModel.Store.FK_ProfileGame">
+            <End Role="Profiles" EntitySet="Profiles" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Score" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="LevelId" Type="int" Nullable="false" />
+          <Property Name="ProfileId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Levels">
+          <Key>
+            <PropertyRef Name="LevelId" />
+          </Key>
+          <Property Name="LevelId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LevelName" Type="ntext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Profiles">
+          <Key>
+            <PropertyRef Name="ProfileId" />
+          </Key>
+          <Property Name="ProfileId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProfileName" Type="ntext" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_LevelGame">
+          <End Role="Levels" Type="HighscoresModel.Store.Levels" Multiplicity="1" />
+          <End Role="Games" Type="HighscoresModel.Store.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Levels">
+              <PropertyRef Name="LevelId" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileGame">
+          <End Role="Profiles" Type="HighscoresModel.Store.Profiles" Multiplicity="1" />
+          <End Role="Games" Type="HighscoresModel.Store.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profiles">
+              <PropertyRef Name="ProfileId" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="ProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HighscoresModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HighscoresEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="Games" EntityType="HighscoresModel.Game" />
+          <EntitySet Name="Levels" EntityType="HighscoresModel.Level" />
+          <EntitySet Name="Profiles" EntityType="HighscoresModel.Profile" />
+          <AssociationSet Name="FK_LevelGame" Association="HighscoresModel.FK_LevelGame">
+            <End Role="Levels" EntitySet="Levels" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileGame" Association="HighscoresModel.FK_ProfileGame">
+            <End Role="Profiles" EntitySet="Profiles" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Score" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LevelId" Type="Int32" Nullable="false" />
+          <Property Name="ProfileId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Level" Relationship="HighscoresModel.FK_LevelGame" FromRole="Games" ToRole="Levels" />
+          <NavigationProperty Name="Profile" Relationship="HighscoresModel.FK_ProfileGame" FromRole="Games" ToRole="Profiles" />
+        </EntityType>
+        <EntityType Name="Level">
+          <Key>
+            <PropertyRef Name="LevelId" />
+          </Key>
+          <Property Name="LevelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="LevelName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Games" Relationship="HighscoresModel.FK_LevelGame" FromRole="Levels" ToRole="Games" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="ProfileId" />
+          </Key>
+          <Property Name="ProfileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="ProfileName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Games" Relationship="HighscoresModel.FK_ProfileGame" FromRole="Profiles" ToRole="Games" />
+        </EntityType>
+        <Association Name="FK_LevelGame">
+          <End Role="Levels" Type="HighscoresModel.Level" Multiplicity="1" />
+          <End Role="Games" Type="HighscoresModel.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Levels">
+              <PropertyRef Name="LevelId" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileGame">
+          <End Role="Profiles" Type="HighscoresModel.Profile" Multiplicity="1" />
+          <End Role="Games" Type="HighscoresModel.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profiles">
+              <PropertyRef Name="ProfileId" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="ProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HighscoresModelStoreContainer" CdmEntityContainer="HighscoresEntities">
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="HighscoresModel.Game">
+              <MappingFragment StoreEntitySet="Games">
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+                <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Levels">
+            <EntityTypeMapping TypeName="HighscoresModel.Level">
+              <MappingFragment StoreEntitySet="Levels">
+                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+                <ScalarProperty Name="LevelName" ColumnName="LevelName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profiles">
+            <EntityTypeMapping TypeName="HighscoresModel.Profile">
+              <MappingFragment StoreEntitySet="Profiles">
+                <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+                <ScalarProperty Name="ProfileName" ColumnName="ProfileName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="DDLGenerationTemplate" Value="$(VSEFTools)\DBGen\SSDLToSQL10GOFixed.tt" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams />
+  </Designer>
+</edmx:Edmx>
