@@ -110,18 +110,9 @@ namespace maths_quiz.Forms
         // Get all the profile names from the database by a query and adds them all to the listbox
         private void GetData()
         {
-            listBoxProfile.Items.Clear();
-
             using (var db = new HighscoresEntities())
             {
-                var query = from n in db.Profiles
-                            orderby n.ProfileId
-                            select n.ProfileName;
-
-                foreach (var item in query)
-                {
-                    listBoxProfile.Items.Add(item);
-                }
+                listBoxProfile.DataSource = db.Profiles.OrderBy(n => n.ProfileId).Select(n => n.ProfileName).ToList();
             }
         }
 
